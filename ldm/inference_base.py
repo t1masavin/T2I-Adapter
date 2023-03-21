@@ -15,6 +15,20 @@ DEFAULT_NEGATIVE_PROMPT = 'longbody, lowres, bad anatomy, bad hands, missing fin
 def get_base_argument_parser() -> argparse.ArgumentParser:
     """get the base argument parser for inference scripts"""
     parser = argparse.ArgumentParser()
+    ################################
+    parser.add_argument(
+        'style',
+        type=str,
+        help='dir to write results to',
+        default=None,
+    )
+    parser.add_argument(
+        'color',
+        type=str,
+        help='dir to write results to',
+        default=None,
+    )
+    #################################
     parser.add_argument(
         '--outdir',
         type=str,
@@ -26,7 +40,7 @@ def get_base_argument_parser() -> argparse.ArgumentParser:
         '--prompt',
         type=str,
         nargs='?',
-        default=None,
+        default=" ",
         help='positive prompt',
     )
 
@@ -70,7 +84,7 @@ def get_base_argument_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         '--sd_ckpt',
         type=str,
-        default='models/sd-v1-4.ckpt',
+        default='models/v1-5-pruned-emaonly.ckpt',
         help='path to checkpoint of stable diffusion model, both .ckpt and .safetensor are supported',
     )
 
@@ -105,7 +119,7 @@ def get_base_argument_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         '--resize_short_edge',
         type=int,
-        default=None,
+        default=512,
         help='resize short edge of the input image, if this arg is set, max_resolution will not be used',
     )
 
@@ -126,7 +140,7 @@ def get_base_argument_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         '--scale',
         type=float,
-        default=7.5,
+        default=9,
         help='unconditional guidance scale: eps = eps(x, empty) + scale * (eps(x, cond) - eps(x, empty))',
     )
 
@@ -163,7 +177,7 @@ def get_base_argument_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         '--n_samples',
         type=int,
-        default=4,
+        default=1,
         help='# of samples to generate',
     )
 
